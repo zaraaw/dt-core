@@ -43,7 +43,8 @@ last_rule = pd.Series().astype("float64")       # inital last_rule is empty Seri
 # rule_pop = pd.read_csv("rule_pop.csv")
 rule_pop = pd.read_csv("/home/osboxes/python_files/LCT/rule_pop.csv").astype("float64")
 
-#%% ROS SUBSCRIBER
+#%% 
+# ROS SUBSCRIBER
 # ROS subriber to the lane_control_node & lane_filter topics
 
 ###### dummy vars for testing 
@@ -54,9 +55,12 @@ v = 3                                # velocity
 d = 0.1                                # lateral offset
 phi = 0                                 # angular offset
 
-#%% CONSTANTS CLASS
+#%% 
+# CONSTANTS CLASS
 # The constants class saves the variables set in the 'Configuration file' as global constants
 class Constants:
+    # def __init__(self):
+        # self.setConstants()
     def __str__(self) -> str:                       # not sure what the -> str does but came up in autofill
         return "This is the constants class"
     def setConstants(self):
@@ -79,25 +83,27 @@ class Constants:
         self.gain = gain
 
         # tbc
-cons = Constants()        
 
-#%% LCT CLASS
+# cons = Constants()
+
+#%% 
+# LCT CLASS
 # LCT class contains the functions for updating fitness, action selection, and applying the action
 # based on c code for implementing LCT 
 class LCT:
     def __str__(self) -> str:
         return "This is the LCT class"
     # def __init__(self): 
-        # TODO
+        # cons = Constants()
     def updatefitness(self):
         print("Running fitness update")
         if cons.last_rule.empty:
             print("No action was selected last instance")
             for i, rule in cons.rule_pop.iterrows():                # iterate through each rule        # 
                     print(f"rule {i}")
-                    print(rule["in_match_set"])
+                    # print(rule["in_match_set"])
                     rule["in_match_set"] = 0                        # reset in_match_set to false
-                    print(rule["in_match_set"])
+                    # print(rule["in_match_set"])
         else:
             reward = 0
             # rewarding for fast speed
@@ -228,7 +234,8 @@ class LCT:
 #%% ROS PUBLISHER
 # ROS publisher for applying the action 
 
-#%% run LCT class
+#%% 
+# run LCT class
 # class for running the LCT (runs the methods in the LCT class, add timing here?)
 class runLCT:
     def __init__(self):
@@ -250,5 +257,7 @@ class runLCT:
         """
 
 # %%
+cons = Constants()
+cons.setConstants()
 runLCT()
 # %%
