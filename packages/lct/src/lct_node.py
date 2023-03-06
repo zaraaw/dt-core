@@ -48,11 +48,14 @@ class LCTNode(DTROS):
         global v
         v = msg_car_cmd.v
 
-        rospy.loginfo("%s",d)
-        rospy.loginfo("%s",phi)
-        rospy.loginfo("%s",in_lane)
+        #rospy.loginfo("%s",d)
+        #rospy.loginfo("%s",phi)
+        #rospy.loginfo("%s",in_lane)
 
         rospy.loginfo("velocity: %s", v)
+        
+        print(f"test {d}, {phi}, {v}")
+
 
     """
     def runLCT(self, d, phi, v):
