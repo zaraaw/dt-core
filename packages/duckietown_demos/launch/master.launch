@@ -125,7 +125,7 @@
           </include>
         </group>
     </group>
-    <!--End FSM -->>
+    <!--End FSM -->
 
 
     <!-- Start Lane Following / LF, IN-->
@@ -134,7 +134,8 @@
     	<!-- Start LCT extension nodes -->
 		<group if="$(arg lct)">
 			<remap from="lct_node/lane_pose" to="lane_filter_node/lane_pose"/>
-			<include file="$(find lct)/launch/lct.launch">
+			<remap from="lct_node/car_cmd" to="lane_controller_node/car_cmd"/>
+            <include file="$(find lct)/launch/lct.launch">
 				<arg name="veh" value="$(arg veh)"/>
 				<arg name="param_file_name" value="$(arg param_file_name)"/>
 	        </include>
