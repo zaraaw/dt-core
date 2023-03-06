@@ -19,7 +19,17 @@ class LCTsubscriberNode(DTROS):
         self.log("Initialized!")
            
     def callback(self,data):
-        rospy.loginfo("Heard: %s", data)
+        #rospy.loginfo("Heard: %s", data)
+
+        global d
+        global phi
+        global in_lane
+
+        d = data.d
+        phi = data.phi
+        in_lane = data.in_lane
+        
+        rospy.loginfo(d, phi, in_lane)
           
 if __name__ == "__main__":
     # Initialize the node
