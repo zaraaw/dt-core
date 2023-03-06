@@ -3,7 +3,7 @@ import numpy as np
 import rospy
 
 from duckietown.dtros import DTROS, NodeType, TopicType, DTParam, ParamType
-from duckietown_msgs.msg import (LanePose)
+from duckietown_msgs.msg import (LanePose, Twist2DStamped)
 
 class LCTsubscriberNode(DTROS):
     def __init__(self, node_name):
@@ -14,30 +14,64 @@ class LCTsubscriberNode(DTROS):
         self.pose_msg = LanePose()
         self.current_pose_source = "lane_filter"
 
+        # self.vel_msg = Twist2DStamped()
+        # self.current_vel_source = "kinematics"
+
+        # contruct publisher
+
+
         # Construct subscribers
-        self.sub_lane_reading = rospy.Subscriber("~lane_pose", LanePose, self.callback)
+        self.sub_lane_reading = rospy.Subscriber("~lane_pose", LanePose, self.lanepose_callback)
+
+        self.sub_car_cmd = rospy.Subscriber("~car_cmd", Twist2DStamped, self.velocity_callback)
+
+        # self.sub_velocity = rospy.Subscriber("~velocity", Twist2DStamped, self.velocity_callback)
+
         self.log("Initialized!")
-           
-    def callback(self,data):
+    
+          
+    def lanepose_callback(self, msg_lane_pose):
+        # call back for lane pose message
         #rospy.loginfo("Heard: %s", data)
 
         global d
         global phi
         global in_lane
 
-        d = data.d
-        phi = data.phi
-        in_lane = data.in_lane
+        d = msg_lane_pose.d
+        phi = msg_lane_pose.phi
+        in_lane = msg_lane_pose.in_lane
         
         rospy.loginfo("%s",d)
         rospy.loginfo("%s",phi)
         rospy.loginfo("%s",in_lane)
+    
+    """
+    def velocity_callback(self, msg_velocity):
+        # callback for velocity message
+
+        global v
+        v = msg_velocity.v
+
+        rospy.loginfo("velocity: %s", v)
+    
+    """
+    def velocity_callback(self, msg_car_cmd):
+            # callback for velocity message
+
+            global v
+            v = msg_car_cmd.v
+
+            rospy.loginfo("velocity: %s", v)
+
+    """
+    def ...(self, d, phi, v):
+        # performs an LCT interation and publishes the gain 
+    """ 
           
 if __name__ == "__main__":
     # Initialize the node
     LCT_subscriber_node = LCTsubscriberNode(node_name="LCTsubscriber")
-    
-   
     # Keep it spinning
     rospy.spin()
     
