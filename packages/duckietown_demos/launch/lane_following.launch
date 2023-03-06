@@ -19,7 +19,7 @@
 		
 		<!-- LCT extension -->
 		
-	   	 <arg name="LCT_subscriber" value="true"/>
+	   	 <arg name="lct" value="true"/>
 		<!-- Deadreckoning (aka. Odometry)	-->
 <!--		<arg name="/localization" value="true"/>
 		<arg name="/localization/deadreckoning" value="true"/>
