@@ -29,7 +29,9 @@ class LCTsubscriberNode(DTROS):
         phi = data.phi
         in_lane = data.in_lane
         
-        rospy.loginfo(d, phi, in_lane)
+        rospy.loginfo("%s",d)
+        rospy.loginfo("%s",phi)
+        rospy.loginfo("%s",in_lane)
           
 if __name__ == "__main__":
     # Initialize the node
