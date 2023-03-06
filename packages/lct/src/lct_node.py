@@ -5,10 +5,10 @@ import rospy
 from duckietown.dtros import DTROS, NodeType, TopicType, DTParam, ParamType
 from duckietown_msgs.msg import (LanePose)
 
-class LCTsubscriberNode(DTROS):
+class LCTNode(DTROS):
     def __init__(self, node_name):
 
-        super(LCTsubscriberNode, self).__init__(node_name=node_name, node_type=NodeType.PERCEPTION)
+        super(LCTNode, self).__init__(node_name=node_name, node_type=NodeType.PERCEPTION)
 
         # Initialize variables
         self.pose_msg = LanePose()
@@ -35,7 +35,7 @@ class LCTsubscriberNode(DTROS):
           
 if __name__ == "__main__":
     # Initialize the node
-    LCT_subscriber_node = LCTsubscriberNode(node_name="LCTsubscriber")
+    lct_node = LCTNode(node_name="lct_node")
     
    
     # Keep it spinning
