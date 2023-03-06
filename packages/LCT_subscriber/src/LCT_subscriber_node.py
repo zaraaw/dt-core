@@ -57,12 +57,13 @@ class LCTsubscriberNode(DTROS):
     
     """
     def velocity_callback(self, msg_car_cmd):
-            # callback for velocity message
+        # callback for velocity message
 
-            global v
-            v = msg_car_cmd.v
+        global v
+        v = msg_car_cmd.v
 
-            rospy.loginfo("velocity: %s", v)
+        #rospy.loginfo("velocity: %s", v)
+        print(f"{d},{phi},{v},{in_lane}")
 
     """
     def ...(self, d, phi, v):
