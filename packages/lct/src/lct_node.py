@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 import numpy as np
 import rospy
-# import LCT 
+import simple_function
+import pandas as pd
+import random
+import LCT 
 
 from duckietown.dtros import DTROS, NodeType, TopicType, DTParam, ParamType
 from duckietown_msgs.msg import (LanePose, Twist2DStamped)
@@ -51,10 +54,21 @@ class LCTNode(DTROS):
         #rospy.loginfo("%s",d)
         #rospy.loginfo("%s",phi)
         #rospy.loginfo("%s",in_lane)
-
-        rospy.loginfo("velocity: %s", v)
+        #rospy.loginfo("velocity: %s", v)
         
-        print(f"test {d}, {phi}, {v}")
+        # print(f"conditions {d}, {phi}, {v}")
+
+        global sum
+        sum = simple_function.simpleFunction().getgain(d, phi, v)
+
+        
+        # global gain
+        # gain = LCT.LCT()run_LCT(d, phi, v)
+        # rospy.set_param("/schorsch/kinematics_node/gain", gain)
+        # gain = rospy.get_param("/schorsch/kinematics_node/gain")
+
+        print(f"{d},{phi},{v},{in_lane}, simple_fn: {sum}")
+
 
 
     """
