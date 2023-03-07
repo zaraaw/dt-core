@@ -42,9 +42,9 @@ class LCTsubscriberNode(DTROS):
         phi = msg_lane_pose.phi
         in_lane = msg_lane_pose.in_lane
         
-        rospy.loginfo("%s",d)
-        rospy.loginfo("%s",phi)
-        rospy.loginfo("%s",in_lane)
+        #rospy.loginfo("%s",d)
+        #rospy.loginfo("%s",phi)
+        #rospy.loginfo("%s",in_lane)
     
     """
     def velocity_callback(self, msg_velocity):
@@ -60,15 +60,24 @@ class LCTsubscriberNode(DTROS):
         # callback for velocity message
 
         global v
-        v = msg_car_cmd.v
+        v = msg_car_cmd.v               # i dont like this v -- it doesnt change from 0.189... when moving or stationary
+
+        global gain
+        
+        rospy.set_param("/schorsch/kinematics_node/gain", 0.5)
+
+        gain = rospy.get_param("/schorsch/kinematics_node/gain")
+
+        print(f"{d},{phi},{v},{in_lane}, gain: {gain}")
+        
 
         #rospy.loginfo("velocity: %s", v)
-        print(f"{d},{phi},{v},{in_lane}")
-
     """
-    def ...(self, d, phi, v):
-        # performs an LCT interation and publishes the gain 
-    """ 
+    def printlog(self, d, phi, v):
+        print(f"IN NEW METHOD:{d},{phi},{v}, {in_lane}")
+        # prob need to add smthn in master.launch so it's run
+    """
+    
           
 if __name__ == "__main__":
     # Initialize the node
