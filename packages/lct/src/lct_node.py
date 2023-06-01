@@ -21,8 +21,8 @@ class LCTNode(DTROS):
         self.current_pose_source = "lane_filter"
 
 
-        # self._mode_topic = rospy.get_param("/self.veh_name/car_cmd_switch_node/mode_topic")
-        self._mode_topic = rospy.get_param("/schorsch/car_cmd_switch_node/mode_topic")
+        self._mode_topic = rospy.get_param("/self.veh_name/car_cmd_switch_node/mode_topic")
+        # self._mode_topic = rospy.get_param("/schorsch/car_cmd_switch_node/mode_topic")
         # self._mode_topic = rospy.get_param("/woifi/car_cmd_switch_node/mode_topic")
 
         # Construct subscribers
@@ -56,8 +56,8 @@ class LCTNode(DTROS):
         
 
         global v
-        # v = rospy.get_param("/self.veh_name/kinematics_node/gain")
-        v = rospy.get_param("/schorsch/kinematics_node/gain")               # using gain as a condition           
+        v = rospy.get_param("/self.veh_name/kinematics_node/gain")
+        # v = rospy.get_param("/schorsch/kinematics_node/gain")               # using gain as a condition           
         # v = rospy.get_param("/woifi/kinematics_node/gain")
 
         global lct_out
@@ -79,8 +79,8 @@ class LCTNode(DTROS):
             c = 0.51333
             trim = m*gain + c
             """           
-            # rospy.set_param("/self.veh_name/kinematics_node/gain", gain)
-            rospy.set_param("/schorsch/kinematics_node/gain", gain)
+            rospy.set_param("/self.veh_name/kinematics_node/gain", gain)
+            # rospy.set_param("/schorsch/kinematics_node/gain", gain)
             # rospy.set_param("/woifi/kinematics_node/gain", gain)
 
             # rospy.set_param("/self.veh_name/kinematics_node/trim", trim)
